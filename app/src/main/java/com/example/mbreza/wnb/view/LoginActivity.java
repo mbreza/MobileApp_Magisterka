@@ -1,16 +1,17 @@
 package com.example.mbreza.wnb.view;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.mbreza.wnb.R;
 import com.example.mbreza.wnb.presenter.LoginPresenter;
-
+import com.example.mbreza.wnb.service.ContextProvider;
 
 public class LoginActivity extends AppCompatActivity implements LoginPresenter.View{
 
@@ -30,24 +31,32 @@ public class LoginActivity extends AppCompatActivity implements LoginPresenter.V
 
         loginPresenter = new LoginPresenter(this);
 
-
-
+        //loginPresenter.register();
 
         Button buttonLogIn = findViewById(R.id.buttonLogIn);
+        Button buttonRegister = findViewById(R.id.buttonRegister);
 
-        View.OnClickListener buttonLogInListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = editTextUsername.getText().toString().trim();
-                String password = editTextPassword.getText().toString().trim();
+        buttonRegister.setOnClickListener((View v) -> {
+            Intent intentRegister = new Intent(LoginActivity.this , RegisterActivity.class);
+            LoginActivity.this.startActivity(intentRegister);
+        });
 
-                Log.e("username", username);
-                Log.e("password", password);
-                loginPresenter.logIn(username, password);
-            }
-        };
+        buttonLogIn.setOnClickListener((View v) -> {
+            String username = editTextUsername.getText().toString().trim();
+            String password = editTextPassword.getText().toString().trim();
+            loginPresenter.logInNoGet(username, password);
+        });
+    }
 
-        buttonLogIn.setOnClickListener(buttonLogInListener);
+    @Override
+    public void showNotify(String info) {
+        Toast toast = Toast.makeText(ContextProvider.getAppContext(), info, Toast.LENGTH_LONG);
+        toast.show();
+    }
 
+    @Override
+    public void redirectHome() {
+        Intent intentHome = new Intent(LoginActivity.this ,HomeActivity.class);
+        LoginActivity.this.startActivity(intentHome);
     }
 }

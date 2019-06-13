@@ -1,11 +1,7 @@
 package com.example.mbreza.wnb.model;
 
-import android.graphics.Movie;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
 
 public class Users {
 
@@ -14,12 +10,20 @@ public class Users {
     private long user_id;
 
     @Expose
-    @SerializedName("login")
-    private String login;
+    @SerializedName("username")
+    private String username;
 
     @Expose
     @SerializedName("password")
     private String password;
+
+    @Expose
+    @SerializedName("active")
+    private boolean active;
+
+    @Expose
+    @SerializedName("login")
+    private String login;
 
     @Expose
     @SerializedName("role")
@@ -37,12 +41,12 @@ public class Users {
         this.user_id = user_id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -51,6 +55,22 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getRole() {
@@ -73,8 +93,10 @@ public class Users {
     public String toString() {
         return "Users{" +
                 "user_id=" + user_id +
-                ", login='" + login + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", active=" + active +
+                ", login='" + login + '\'' +
                 ", role='" + role + '\'' +
                 ", verification_points=" + verification_points +
                 '}';

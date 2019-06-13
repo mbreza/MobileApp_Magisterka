@@ -13,6 +13,6 @@ import retrofit2.http.Headers;
 
 public interface  UsersService {
 
-    @GET("/api/users/getall")
+    @GET("/android/users/getall")
     Observable<List<Users>> getUsers();
 }
